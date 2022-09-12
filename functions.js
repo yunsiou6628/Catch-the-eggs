@@ -33,9 +33,11 @@ function set_egg_to_initial_position(egg) {
 }
 
 // 設定雞蛋掉落到地板 顯示破掉雞蛋
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
 function show_bulls_eye(egg) {
     bullseye_num = egg.attr('data-bullseye')
-    if (egg.css('background-image') == 'url("./egg3.png")') {
+    let egghit = egg.css('background-image')
+    if (egghit.includes('egg3')) {
         $('#bullseye' + bullseye_num).css('background-image', 'url("./egg5.png")')
     } else {
         $('#bullseye' + bullseye_num).css('background-image', 'url("./egg4.png")')
@@ -63,7 +65,8 @@ function check_egg_hits_basket(egg) {
     if (collision(egg, basket)) {
         egg_top = parseInt(egg.css('top'))
         if (egg_top < basket_top) {     //basket_top = container_height - basket_height,
-            if (egg.css('background-image') == 'url("./egg3.png")') {
+            let egghit2 = egg.css('background-image')
+            if (egghit2.includes('egg3')) {
                 // console.log(123)  // 測試 圖片是否進判斷中
                 flag = false    // false = 金雞蛋  ，原本宣告為 flag = true 因此一般情況下是 flag = true ，遇到金雞蛋改成 false (若增加第三種蛋，可將 true/false 改成數字 if(flag = 1或2或3...){執行...}  )
             }
@@ -74,6 +77,7 @@ function check_egg_hits_basket(egg) {
     return false
 }
 
+// egghit.includes('egg3')
 // 設定更新分數機制
 function update_score() {
     // console.log(flag)
